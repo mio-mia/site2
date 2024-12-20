@@ -1,0 +1,71 @@
+@charset "utf-8";
+
+/* 
+  1) map은 어디에 써먹어요? = 홈페이지에서 개발자도구를 열면 scss의 어디에서 저걸 작성했는지 알려줌
+  2) 이제 css는 손 안 댈거임!!!!! scss로 작업한 css는 모두 scss로 작업할거에요
+  3) scss로 작업한 css를 css파일에서 수정해도 되나여?
+     = 되긴 하는디 scss로 수정하면 그거 다 덮힘 (= 아무 의미없는 짓거리)
+
+*/
+
+/* variable(변수) */
+//이거는 scss 기준 사용임(일반 css는 :root)
+$img: url('../images/img-logo.png') no-repeat;
+$main_color01: #e26d5d;
+$main_color02: #5d9fca;
+
+
+/* base */
+body{background: url('../images/bg.jpg') no-repeat #182d40; background-size: 100% auto;}
+.img{background: $img;  text-indent: -999999px;} // 변수 호출(= css의 var(--어쩌고))
+a{color: inherit; text-decoration: none; display: inline-block;}
+  //inherit = 부모와 동일하게
+.font{font-family: "Just Another Hand"; text-transform: uppercase;
+      letter-spacing: -0.02em;}
+
+
+/* header */
+header{position: fixed; bottom: 0; left: 0; width: 100%; height: 130px;
+       background: #fff; box-shadow: 0 -1px rgba(0, 0, 0, 0.1);
+
+      .title{position: absolute; top: 35px; left: 204px;
+        width: 173px; height: 60px;
+        background-position: 0 -453px; // x축 y축임. -(마이너스) 값 사용 가능
+        /* 
+           통짜 이미지 사용할 때는 (1)내가 사용하려는 부분의 이미지의 너비/ 높이 와
+           (2) 이미지 시작점 기준 너비/ 높이(또는 왼쪽 위에 시작점 좌표)를 포토샵으로 확인할 것
+           (1)은 width/height 값으로, (2)는 background-position 값으로 사용
+        */}
+
+      .emblem{position: absolute; top: -70px; left: 15px; width: 176px; height: 196px;}
+    }//end: header
+
+/* gnb */
+#gnb{
+  float: right; font-size: 22px; line-height: 40px;
+
+  li{float: left; padding: 22px 11px 0; border-left: 1px solid #ddd;}
+  a{color: #5e5e5e; transition: all 0.3s ease-in-out; border-bottom: 2px solid #fff;}
+  li:hover a{color: $main_color01; border-bottom: 2px solid $main_color01;}
+  a::before{color: $main_color01;}
+
+  .sub{
+    position: absolute; bottom: 110px; margin-left: -11px;
+    opacity: 0; visibility: hidden; transition: all 0.4s;
+
+    li{float: none; border: 0; background-color: #fff; margin-bottom: 1px;
+       padding: 7px 14px 3px;}
+    li:first-child{border-radius: 3px 3px 0 0;}
+    a{border: 0;} 
+  }
+  
+  li:hover .sub{opacity: 1; visibility: visible; bottom: 130px;}
+}
+
+
+/* .counter */
+.counter{
+  ul{counter-reset: menu;} //내가 menu라는 카운터를 생성함
+  li{counter-increment: menu;} //li마다 menu 카운터를 1씩 늘림
+  li a::before{content: "0"counter(menu)" ";}
+}

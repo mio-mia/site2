@@ -25,7 +25,8 @@ a{color: inherit; text-decoration: none; display: inline-block;}
 
 
 /* header */
-header{position: fixed; bottom: 0; left: 0; width: 100%; height: 130px;
+header{position: fixed; bottom: 0; left: 0; z-index: 100;
+       width: 100%; height: 130px;
        background: #fff; box-shadow: 0 -1px rgba(0, 0, 0, 0.1);
 
       .title{position: absolute; top: 35px; left: 204px;
@@ -40,6 +41,7 @@ header{position: fixed; bottom: 0; left: 0; width: 100%; height: 130px;
       .emblem{position: absolute; top: -70px; left: 15px; width: 176px; height: 196px;}
 }//end: header
 
+
 /* .sns */
 .sns{
   float: right;
@@ -50,10 +52,10 @@ header{position: fixed; bottom: 0; left: 0; width: 100%; height: 130px;
   a{width: 24px; height: 24px;}
   .fb{background-position: 0 -609px;}
   .fb:hover{background-position: 0 -633px;}
-  .tw{background-position: 0 -546px;}  //533
-  .tw:hover{background-position: 0 -570px;} //516
-  .rss{background-position: 0 -498px;}
-  .rss:hover{background-position: 0 -522px;}
+  .tw{background-position: 0 -561px;}
+  .tw:hover{background-position: 0 -585px;}
+  .rss{background-position: 0 -513px;}
+  .rss:hover{background-position: 0 -537px;}
 }
 
 
@@ -94,5 +96,56 @@ header{position: fixed; bottom: 0; left: 0; width: 100%; height: 130px;
   position: absolute; right: 0; bottom: 0;
   background-color: $main_color01;
   font: 14px/46px "Arial"; font-weight: bold; color: #eea79e;
+  padding: 0 20px; border-radius: 2px 0 0;
 
+  li{display: inline-block;}
+  li::after{content: " / "; padding: 0 2px;}
+  li:last-child::after{display: none;}
+  a{color: #fff; border-bottom: 1px solid transparent; //transparent = 투명색
+    transition: all 0.2s ease-in-out; display: inline; padding-bottom:  2px;}
+  a:hover,
+  a.active{border-color: #fff;}
+}
+
+/* #main_view */
+#main_view{
+  width: 100%; height: 100vh; overflow: hidden; position: relative;
+  //기존에 연결부에서 가져다 쓰던 css 파일을 가져오지 않고 내가 직접 스크립트 작업을 할거면
+  //overflow: hidden, display: flex, flex-shrink: 0 같은건 본인이 직접 설정해줘야됨
+
+  .slider{
+    display: flex;
+    .view{width: 100%; height: 100vh; flex-shrink: 0;
+          position: relative;
+          //flex-shrink: 0; = flex item은 부모의 넓이/높이에 맞게 변형되는데 이거 설정하면
+          //                  변형 없이 원래 사이즈 유지함
+          background: no-repeat center center; background-size: cover;}
+    .view01{background-image: url('../images/slide-1.jpg');}
+    .view02{background-image: url('../images/slide-2.jpg');}
+    .view03{background-image: url('../images/slide-3.jpg');}
+
+    h3,a{position: absolute; right: 0; color: #fff;
+         transform: translateX(100%); transition: all 0.3s ease-in-out;}
+    h3{font-size: 60px; bottom: 200px; padding: 12px 10px 4px;
+       background: rgba(0, 0, 0, 0.7);}
+    a{font-size: 26px; bottom: 150px; padding: 8px 6px 4px;
+      background-color: $main_color01;}
+    .view.active{
+      h3{transform: translateX(0); transition-delay: 0.3s;}
+      a{transform: translateX(0); transition-delay: 0.5s;}
+    }
+  }
+
+  .pager{
+    position: absolute; top: 70px; right: 20px; z-index: 90;
+
+    span{display: inline-block; margin-left: 4px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: #000000aa; position: relative;
+      box-shadow: 0 1px 1px #ffffff66,
+                  0 1px 1px #00000088 inset;}
+    span.active::before{content: ""; position: absolute;
+      width: 10px; height: 10px; border-radius: 50%;
+      top: 3px; left: 3px; background: $main_color01;}
+  }
 }

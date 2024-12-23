@@ -68,4 +68,5 @@ header{position: fixed; bottom: 0; left: 0; width: 100%; height: 130px;
   ul{counter-reset: menu;} //내가 menu라는 카운터를 생성함
   li{counter-increment: menu;} //li마다 menu 카운터를 1씩 늘림
   li a::before{content: "0"counter(menu)" ";}
+  li li a::before{content: counters(menu,".")" ";} //"." -> 구분기호
 }

@@ -15,5 +15,10 @@ var main_view = new Swiper("#main_view",{
     el: ".pager",    //페이지 버튼 대상
     clickable: true,    // 버튼이나 네비게이션을 클릭하면 슬라이더가 넘어가도록
     bulletActiveClass: "active",    // 활성화된 슬라이드에 따라 페이지 버튼이 추가되는 클래스명
+  },
+  // Navigation arrows
+  navigation: {
+    nextEl: '.next',
+    prevEl: '.prev',
   }
 });

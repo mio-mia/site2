@@ -22,3 +22,17 @@ var main_view = new Swiper("#main_view",{
     prevEl: '.prev',
   }
 });
+
+
+// clone nav
+
+var ul = document.querySelector("#gnb ul");
+var clone_ul = ul.cloneNode(true);  // 요소 복제
+  // 인수가 없거나, false이면 대상요소만 복제 / 인수가 true이면 하위 요소까지 포함해서 복제
+var main_menu = document.getElementById("main_menu");
+main_menu.appendChild(clone_ul);
+
+var all_a = main_menu.querySelectorAll("a");
+all_a.forEach(function(a){
+  a.classList.add("arrow");
+});
